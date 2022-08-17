@@ -3,38 +3,19 @@ import { Layout } from "../components/Layouts/Layout";
 import { GetStaticProps } from "next";
 import { clienteAxios } from "../config";
 import { PokemoneList, SmallPokemon } from "../interfaces";
-import { Card, Grid, Row, Text } from "@nextui-org/react";
+import { CardPokemon } from "../components/Pokemon";
+import { Grid } from "@nextui-org/react";
 
 interface Props {
   pokemones: SmallPokemon[];
 }
-const Home: NextPage<any> = ({ pokemones }: Props) => {
+const Home: NextPage<Props> = ({ pokemones }) => {
   return (
     <>
       <Layout title={"Listado de pokemones"}>
         <Grid.Container gap={2} justify="flex-start">
-          {pokemones.map(({ id, name, img }) => {
-            return (
-              <Grid xs={6} sm={3} md={2} xl={1} key={id}>
-                <Card isHoverable isPressable>
-                  <Card.Body>
-                    <Card.Image
-                      src={img}
-                      alt={`pokemon ${name}`}
-                      width={"100%"}
-                      height={140}
-                    />
-                  </Card.Body>
-
-                  <Card.Footer>
-                    <Row justify="space-between">
-                      <Text transform="capitalize">{name}</Text>
-                      <Text>#{id}</Text>
-                    </Row>
-                  </Card.Footer>
-                </Card>
-              </Grid>
-            );
+          {pokemones.map((pokemon) => {
+            return <CardPokemon pokemon={pokemon} key={pokemon.id} />;
           })}
         </Grid.Container>
       </Layout>
