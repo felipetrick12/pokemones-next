@@ -6,7 +6,7 @@ import { Navbar } from "../UI";
 interface Props {
   children: JSX.Element;
   title: string;
-  pokemon: Pokemon;
+  pokemon?: Pokemon;
 }
 
 export const Layout: FC<Props> = ({ children, pokemon, title }) => {
