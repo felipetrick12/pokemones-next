@@ -1,9 +1,18 @@
-import { Spacer, Text, useTheme } from "@nextui-org/react";
+import { Link, Spacer, Text, useTheme } from "@nextui-org/react";
 import Image from "next/image";
+import NextLink from "next/link";
+
+import { useRouter } from "next/router";
 import React from "react";
 
 const Navbar = () => {
   const { theme } = useTheme();
+  const router = useRouter();
+
+  // const handleClick = (route: string) => {
+  //   router.push(route);
+  // };
+
   return (
     <div
       style={{
@@ -16,24 +25,33 @@ const Navbar = () => {
         backgroundColor: theme?.colors.gray100.value,
       }}
     >
-      <Image
-        src={
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
-        }
-        alt={"Imagen pokémon"}
-        width={70}
-        height={70}
-      />
-      <Text color="white" h2>
-        P
-      </Text>
-      <Text color="white" h3>
-        okémon
-      </Text>
+      <NextLink href={"/"} passHref>
+        <Link css={{ display: "flex", alignItems: "center" }}>
+          <Image
+            src={
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+            }
+            alt={"Imagen pokémon"}
+            width={70}
+            height={70}
+          />
+          <Text color="white" h2>
+            P
+          </Text>
+          <Text color="white" h3>
+            okémon
+          </Text>
+        </Link>
+      </NextLink>
+
       <Spacer css={{ flex: 1 }} />
-      <Text color="white" h3>
-        Favoritos
-      </Text>
+      <NextLink href={"/favorites"} passHref>
+        <Link>
+          <Text color="white" h3>
+            Favoritos
+          </Text>
+        </Link>
+      </NextLink>
     </div>
   );
 };
