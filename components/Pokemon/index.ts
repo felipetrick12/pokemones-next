@@ -1,2 +1,5 @@
 import CardPokemon from "./CardPokemon";
-export { CardPokemon };
+import listPokemon from "./ListPokemon";
+import Pokemon from "./CardPokemon";
+
+export { CardPokemon, listPokemon, Pokemon };
