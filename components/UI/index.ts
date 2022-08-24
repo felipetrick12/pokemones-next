@@ -1,3 +1,4 @@
 import Navbar from "./Navbar";
+import NoPokemon from "./NoPokemon";
 
-export { Navbar };
+export { Navbar, NoPokemon };
