@@ -9,6 +9,8 @@ interface Props {
   pokemon?: Pokemon;
 }
 
+const originPath = typeof window === "undefined" ? "" : window.location.origin;
+
 export const Layout: FC<Props> = ({ children, pokemon, title }) => {
   return (
     <>
@@ -20,6 +22,12 @@ export const Layout: FC<Props> = ({ children, pokemon, title }) => {
           content={`Información sobre el pokemon ${pokemon}`}
         />
         <meta name="keywords" content={`${title}, pokemon, pokedex`} />
+        <meta property="og:title" content={`Información sobre ${title}`} />
+        <meta
+          property="og:description"
+          content={`Esta es la pagina de ${title}`}
+        />
+        <meta property="og:image" content={`${originPath}/img/banner.png`} />
       </Head>
       <Navbar />
       <main
