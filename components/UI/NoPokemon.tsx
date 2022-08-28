@@ -14,7 +14,7 @@ const NoPokemon = () => {
         height: "100vh",
       }}
     >
-      <Text h2>No hay pokemones</Text>
+      <Text h2>No hay favoritos</Text>
       <Image
         src={
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/75.svg"

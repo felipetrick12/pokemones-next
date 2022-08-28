@@ -39,7 +39,7 @@ const Navbar = () => {
             P
           </Text>
           <Text color="white" h3>
-            okémon
+            okémon!
           </Text>
         </Link>
       </NextLink>
