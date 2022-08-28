@@ -12,13 +12,13 @@ const CardPokemon: FC<Props> = ({ pokemon }) => {
 
   const router = useRouter();
 
-  const handleClick = (id: number) => {
-    router.push(`/pokemon/${id}`);
+  const handleClick = (name: string) => {
+    router.push(`/name/${name}`);
   };
 
   return (
     <Grid xs={6} sm={3} md={2} xl={1} key={id}>
-      <Card isHoverable isPressable onClick={(e) => handleClick(pokemon.id)}>
+      <Card isHoverable isPressable onClick={(e) => handleClick(pokemon.name)}>
         <Card.Body>
           <Card.Image
             src={img}

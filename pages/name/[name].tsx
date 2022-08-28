@@ -3,9 +3,10 @@ import { GetStaticProps, NextPage, GetStaticPaths } from "next";
 import Image from "next/image";
 import confetti from "canvas-confetti";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Layout } from "../../components/Layouts";
-import { Pokemon } from "../../interfaces";
+import { clienteAxios } from "../../config";
+import { Pokemon, PokemoneList } from "../../interfaces";
 import { getPokemonInfo, toggleFavorite } from "../../utils";
 import { existInFavorites } from "../../utils/localFavorites";
 
@@ -13,12 +14,10 @@ interface Props {
   pokemon: Pokemon;
 }
 
-const PokemonSelect: NextPage<Props> = ({ pokemon }) => {
-  useEffect(() => {
-    setisInFavorites(existInFavorites(pokemon.id) as boolean);
-  }, [pokemon.id]);
-
-  const [isInFavorites, setisInFavorites] = useState(false);
+const PokemonByName: NextPage<Props> = ({ pokemon }) => {
+  const [isInFavorites, setisInFavorites] = useState(
+    existInFavorites(pokemon.id)
+  );
 
   const handleFavorites = () => {
     toggleFavorite(pokemon.id);
@@ -112,24 +111,25 @@ const PokemonSelect: NextPage<Props> = ({ pokemon }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const pokemons151 = [...Array(151)].map((value, index) => `${index + 1}`);
+  const { data } = await clienteAxios.get<PokemoneList>("/pokemon?limit=151");
+  const PokemonListName: string[] = data.results.map((pokemon) => pokemon.name);
 
   return {
-    paths: pokemons151.map((id) => ({
-      params: { id },
+    paths: PokemonListName.map((name) => ({
+      params: { name },
     })),
     fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as { id: string };
+  const { name } = params as { name: string };
 
   return {
     props: {
-      pokemon: await getPokemonInfo(id),
+      pokemon: await getPokemonInfo(name),
     },
   };
 };
 
-export default PokemonSelect;
+export default PokemonByName;
