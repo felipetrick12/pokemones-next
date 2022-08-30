@@ -7,12 +7,18 @@ interface Props {
   sprites: Sprites;
 }
 
-export const getPokemonInfo = async (nameOrId: string): Promise<Props> => {
+export const getPokemonInfo = async (
+  nameOrId: string
+): Promise<Props | null> => {
   const { data } = await clienteAxios.get<Pokemon>(`/pokemon/${nameOrId}`);
 
-  return {
-    id: data.id,
-    name: data.name,
-    sprites: data.sprites,
-  };
+  try {
+    return {
+      id: data.id,
+      name: data.name,
+      sprites: data.sprites,
+    };
+  } catch (error) {
+    return null;
+  }
 };

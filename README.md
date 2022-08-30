@@ -3,3 +3,4 @@
 1. SSG (Static Site Generation)
 2. GetStaticProps and GetStaticPaths
 3. Open Grap Meta tags
+4. Incremental Static Regeneration
